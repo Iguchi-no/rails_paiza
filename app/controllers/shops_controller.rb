@@ -3,7 +3,11 @@ class ShopsController < ApplicationController
 
   # GET /shops or /shops.json
   def index
-    @shops = Shop.all
+    if params[:name_key]
+      @shops = Shop.where('name LIKE ?', "%#{params[:name_key]}%")
+    else
+      @shops = Shop.all
+    end
   end
 
   # GET /shops/1 or /shops/1.json
